@@ -32,6 +32,10 @@ public class Squares
         this.stage = stage;
     }
 
+    /**
+     * Main game loop.
+     * It creates random squares which RAIN FROM THE MOTHER-EFFING SKY.
+     */
     public void run()
     {
         Group root = new Group();
@@ -44,11 +48,13 @@ public class Squares
 
         Random rng = new Random();
 
+        // Each KeyFrame represents one tick.
         KeyFrame k = new KeyFrame(Duration.millis(FRAME_DURATION), event ->
         {
+            // Create squares at random.
             if (rng.nextInt(100) > 95)
             {
-                MovableSquare newSquare = new MovableSquare(SQUARE_WIDTH, 2, (double) rng.nextInt(WINDOW_WIDTH), (double) SQUARE_WIDTH - 10);
+                MovableSquare newSquare = new MovableSquare(SQUARE_WIDTH, 2, (double) rng.nextInt(WINDOW_WIDTH), (double) -SQUARE_WIDTH - 10);
                 newSquare.setFill(Color.WHITE);
                 newSquare.setStroke(Color.BLACK);
                 enemies.add(newSquare);
@@ -57,6 +63,7 @@ public class Squares
 
             ArrayList<MovableSquare> enemiesToRemove = new ArrayList<>();
 
+            // Move enemies and remove enemies that are out of bounds.
             for (MovableSquare enemy : enemies)
             {
                 enemy.move();
@@ -65,11 +72,11 @@ public class Squares
                     enemiesToRemove.add(enemy);
                 }
             }
-
             enemies.removeAll(enemiesToRemove);
-            enemiesToRemove.clear();
+            //enemiesToRemove.clear();
         });
 
+        // Run the animation
         Timeline t = new Timeline(k);
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
