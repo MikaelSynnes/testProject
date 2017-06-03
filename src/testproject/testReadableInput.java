@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author Mikael9
  */
-public class main {
+public class testReadableInput {
 
     /**
      * @param args the command line arguments
