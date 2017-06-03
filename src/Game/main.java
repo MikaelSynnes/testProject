@@ -7,12 +7,14 @@ package Game;
 
 import MoveableObjects.Player;
 import Movement.Keyboard;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  *
  * @author Mikael
  */
-public class main {
+public class main extends Application{
 
     private static int time;
     private static boolean run = false;
@@ -24,10 +26,16 @@ public class main {
 
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception
+    {
+        Squares squares = new Squares(primaryStage);
+    }
+
     public static void main(String[] args) {
         player=new Player();
         key=new Keyboard();
-        run();
+        //run();
     }
 
     public static void run() {
