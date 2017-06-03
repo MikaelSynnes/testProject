@@ -5,63 +5,69 @@
  */
 package Game;
 
+import MoveableObjects.Player;
+import Movement.Keyboard;
+
 /**
  *
  * @author Mikael
  */
 public class main {
 
-    private int time;
-    private boolean run = false;
-    private boolean paused = false;
+    private static int time;
+    private static boolean run = false;
+    private static boolean paused = false;
+    private static Keyboard key;
+    private static Player player;
 
     public main() {
 
     }
 
     public static void main(String[] args) {
-
+        player=new Player();
+        key=new Keyboard();
+        run();
     }
 
-    public void run() {
+    public static void run() {
+        run=true;
         while (run) {
-            
+            if (!player.checkIfAlive()) {
+                run=false;
+            }
             if (paused) {
             } else {
                 time++;
                 doOneGameTick();
             }
         }
-        
+
         System.out.println("GAME OVER");
     }
-    
-    
-            
-    public void doOneGameTick(){
+
+    public static void doOneGameTick() {
+
+        String keyPressed = key.readInput();
+        System.out.println(keyPressed);
+        player.move(keyPressed);
         System.out.println("One game tick done, gametick nr: " + time);
-        
+
         // TODO: Insert gamefunction, check for input and control playerClass
-        
     }
-    
-    
-    
+
     // Sets the game on pause if its unpaused. if the game is unpaused it will pause it.
-    public void setPaused(){
-        if(paused){
-            paused=false;
-        }
-        else{
-        paused=true;
+    public void setPaused() {
+        if (paused) {
+            paused = false;
+        } else {
+            paused = true;
         }
     }
-   
-    
+
     //ends the game.
-    public void end(){
-        run=false;
+    public void end() {
+        run = false;
     }
 
 }
-
