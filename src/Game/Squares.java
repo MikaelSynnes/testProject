@@ -1,11 +1,16 @@
 package Game;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Asgeir on 03.06.2017.
@@ -17,9 +22,10 @@ public class Squares
 
     private static final int WINDOW_WIDTH = 1280;
     private static final int WINDOW_HEIGHT = 720;
+    private static final double FRAME_DURATION = 10;
     private static final int SQUARE_WIDTH = 40;
 
-    private ArrayList<Rectangle> enemies = new ArrayList<>();
+    private ArrayList<MovableSquare> enemies = new ArrayList<>();
 
     public Squares(Stage stage)
     {
@@ -35,6 +41,37 @@ public class Squares
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        new Rectangle()
+
+        Random rng = new Random();
+
+        KeyFrame k = new KeyFrame(Duration.millis(FRAME_DURATION), event ->
+        {
+            if (rng.nextInt(100) > 95)
+            {
+                MovableSquare newSquare = new MovableSquare(SQUARE_WIDTH, 2, (double) rng.nextInt(WINDOW_WIDTH), (double) SQUARE_WIDTH - 10);
+                newSquare.setFill(Color.WHITE);
+                newSquare.setStroke(Color.BLACK);
+                enemies.add(newSquare);
+                root.getChildren().add(newSquare);
+            }
+
+            ArrayList<MovableSquare> enemiesToRemove = new ArrayList<>();
+
+            for (MovableSquare enemy : enemies)
+            {
+                enemy.move();
+                if (enemy.getY() > WINDOW_HEIGHT + enemy.getHeight())
+                {
+                    enemiesToRemove.add(enemy);
+                }
+            }
+
+            enemies.removeAll(enemiesToRemove);
+            enemiesToRemove.clear();
+        });
+
+        Timeline t = new Timeline(k);
+        t.setCycleCount(Timeline.INDEFINITE);
+        t.play();
     }
 }

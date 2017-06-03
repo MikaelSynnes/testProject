@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  *
  * @author Mikael
  */
-public class main extends Application{
+public class Main extends Application{
 
     private static int time;
     private static boolean run = false;
@@ -22,7 +22,7 @@ public class main extends Application{
     private static Keyboard key;
     private static Player player;
 
-    public main() {
+    public Main() {
 
     }
 
@@ -30,12 +30,14 @@ public class main extends Application{
     public void start(Stage primaryStage) throws Exception
     {
         Squares squares = new Squares(primaryStage);
+        squares.run();
     }
 
     public static void main(String[] args) {
-        player=new Player();
-        key=new Keyboard();
+        //player=new Player();
+        //key=new Keyboard();
         //run();
+        launch(args);
     }
 
     public static void run() {
