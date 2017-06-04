@@ -114,6 +114,9 @@ public class Squares
         t.play();
     }
 
+    /**
+     * Pauses and unpauses the game.
+     */
     private void pauseGame()
     {
         if (running)
