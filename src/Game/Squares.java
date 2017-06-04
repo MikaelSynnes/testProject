@@ -7,8 +7,9 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -115,11 +116,16 @@ public class Squares {
             -> pauseGame());
         Button exitButton = new Button("Exit");
 
-            exitButton.setOnAction (event 
+        Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+       // scene.setOnKeyReleased(this::keyPressed);
+        stage.setTitle("Norway 9001 Prototype");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
 
     
 
-            -> Platform.exit());
+         //   -> Platform.exit());
             buttonBar.getChildren ()
             .addAll(pauseButton, exitButton);
                   
@@ -131,7 +137,7 @@ public class Squares {
             }
         });
       
-        Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+      //  Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 
             stage.setTitle (
                     
@@ -199,7 +205,16 @@ public class Squares {
             t.play();
         }
     }
-    public StackPane getRoot(){
-        return root;
-    }
+
+    /**
+     * Handle keyboard keyPressed events.
+     * @param ke The keyboard event to handle.
+     */
+ /*   private void keyPressed(KeyEvent ke)
+    {
+        if (ke.getCode() == KeyCode.P)
+        {
+            pauseGame();
+        }
+    }*/
 }
