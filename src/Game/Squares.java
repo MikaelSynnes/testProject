@@ -97,7 +97,7 @@ public class Squares
             // Create squares at random.
             if (rng.nextInt(100) > 95)
             {
-                MovableSquare newSquare = new MovableSquare(SQUARE_WIDTH, 2, (double) WINDOW_WIDTH + 10, (double) rng.nextInt(WINDOW_HEIGHT - SQUARE_WIDTH - 10));
+                MovableSquare newSquare = new MovableSquare(SQUARE_WIDTH, rng.nextInt(4) + 1, (double) WINDOW_WIDTH + 10, (double) rng.nextInt(WINDOW_HEIGHT - SQUARE_WIDTH - 10));
                 newSquare.setFill(Color.WHITE);
                 newSquare.setStroke(Color.BLACK);
                 enemies.add(newSquare);
