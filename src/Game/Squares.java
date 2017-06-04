@@ -4,8 +4,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -27,7 +29,12 @@ public class Squares
     private static final double FRAME_DURATION = 10;
     private static final int SQUARE_WIDTH = 40;
 
+    private boolean running = true;
+
     private ArrayList<MovableSquare> enemies = new ArrayList<>();
+
+    private KeyFrame k;
+    private Timeline t;
 
     public Squares(Stage stage)
     {
@@ -43,12 +50,17 @@ public class Squares
         StackPane root = new StackPane();
         Pane planets = new Pane();
         Pane ships = new Pane();
+        VBox buttonBar = new VBox();
 
-        root.getChildren().addAll(planets, ships);
+        root.getChildren().addAll(planets, ships, buttonBar);
         planets.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         planets.setMaxSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         ships.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         ships.setMaxSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+        Button pauseButton = new Button("Pause");
+        pauseButton.setOnAction(event -> pauseGame());
+        buttonBar.getChildren().add(pauseButton);
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         stage.setTitle("Many Squares, Handle It!");
@@ -59,7 +71,7 @@ public class Squares
         Random rng = new Random();
 
         // Each KeyFrame represents one tick.
-        KeyFrame k = new KeyFrame(Duration.millis(FRAME_DURATION), event ->
+        k = new KeyFrame(Duration.millis(FRAME_DURATION), event ->
         {
             // Create squares at random.
             if (rng.nextInt(100) > 95)
@@ -88,8 +100,22 @@ public class Squares
         });
 
         // Run the animation
-        Timeline t = new Timeline(k);
+        t = new Timeline(k);
         t.setCycleCount(Timeline.INDEFINITE);
         t.play();
+    }
+
+    private void pauseGame()
+    {
+        if (running)
+        {
+            running = false;
+            t.pause();
+        }
+        else
+        {
+            running = true;
+            t.play();
+        }
     }
 }
