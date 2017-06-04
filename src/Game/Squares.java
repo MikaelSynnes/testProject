@@ -1,7 +1,7 @@
 package Game;
 
 import MoveableObjects.Player;
-import java.awt.event.KeyEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -133,6 +133,9 @@ public class Squares {
             @Override
 
             public void handle(javafx.scene.input.KeyEvent event) {
+                if(event.getCode()==KeyCode.P){
+                    pauseGame();
+                }else
                 player.keyPressed(event);
             }
         });
@@ -210,11 +213,5 @@ public class Squares {
      * Handle keyboard keyPressed events.
      * @param ke The keyboard event to handle.
      */
- /*   private void keyPressed(KeyEvent ke)
-    {
-        if (ke.getCode() == KeyCode.P)
-        {
-            pauseGame();
-        }
-    }*/
+  
 }

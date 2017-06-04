@@ -8,7 +8,7 @@ package MoveableObjects;
 import javafx.scene.input.KeyCode;
 import static javafx.scene.input.KeyCode.DOWN;
 import static javafx.scene.input.KeyCode.LEFT;
-import static javafx.scene.input.KeyCode.RIGHT;
+import static javafx.scene.input.KeyCode.*;
 import static javafx.scene.input.KeyCode.UP;
 import javafx.scene.input.KeyEvent;
 
