@@ -5,7 +5,6 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -158,7 +157,7 @@ public class Squares
     }
 
     /**
-     * Handle keyboard events.
+     * Handle keyboard keyPressed events.
      * @param ke The keyboard event to handle.
      */
     private void keyPressed(KeyEvent ke)
