@@ -2,14 +2,13 @@ package Game;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.Group;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -60,7 +59,9 @@ public class Squares
 
         Button pauseButton = new Button("Pause");
         pauseButton.setOnAction(event -> pauseGame());
-        buttonBar.getChildren().add(pauseButton);
+        Button exitButton = new Button("Exit");
+        exitButton.setOnAction(event -> Platform.exit());
+        buttonBar.getChildren().addAll(pauseButton, exitButton);
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         stage.setTitle("Many Squares, Handle It!");
