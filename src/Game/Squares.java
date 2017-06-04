@@ -75,8 +75,8 @@ public class Squares
         // Set up planet
         ImageView planet = new ImageView("testPlanet.png");
         planets.getChildren().add(planet);
-        planet.setX((double) rng.nextInt(WINDOW_WIDTH));
-        planet.setY(-500);
+        planet.setX(WINDOW_WIDTH + 10);
+        planet.setY((double) rng.nextInt(WINDOW_HEIGHT) - 200);
 
         // Set up buttons
         Button pauseButton = new Button("Pause");
@@ -105,14 +105,14 @@ public class Squares
             }
 
             // Move the planet
-            if (planet.getY() > WINDOW_HEIGHT)
+            if (planet.getX() < -500)
             {
-                planet.setX((double) rng.nextInt(WINDOW_WIDTH));
-                planet.setY(-500);
+                planet.setX(WINDOW_WIDTH + 10);
+                planet.setY((double) rng.nextInt(WINDOW_HEIGHT));
             }
             else
             {
-                planet.setY(planet.getY() + 1);
+                planet.setX(planet.getX() - 1);
             }
 
             ArrayList<MovableSquare> enemiesToRemove = new ArrayList<>();
