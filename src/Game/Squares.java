@@ -115,9 +115,12 @@ public class Squares {
     
             -> pauseGame());
         Button exitButton = new Button("Exit");
+            exitButton.setOnAction(event
+                    
+                    ->  Platform.exit());
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-       // scene.setOnKeyReleased(this::keyPressed);
+         
         stage.setTitle("Norway 9001 Prototype");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -125,7 +128,7 @@ public class Squares {
 
     
 
-         //   -> Platform.exit());
+         
             buttonBar.getChildren ()
             .addAll(pauseButton, exitButton);
                   
@@ -140,7 +143,7 @@ public class Squares {
             }
         });
       
-      //  Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+        //Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 
             stage.setTitle (
                     
