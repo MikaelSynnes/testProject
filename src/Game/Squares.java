@@ -34,7 +34,6 @@ public class Squares
 
     private ArrayList<MovableSquare> enemies = new ArrayList<>();
 
-    private KeyFrame k;
     private Timeline t;
 
     public Squares(Stage stage)
@@ -55,8 +54,8 @@ public class Squares
         VBox buttonBar = new VBox();
 
         ImageView bgImg = new ImageView("testBG.png");
-        bgImg.setFitWidth(WINDOW_WIDTH);
-        bgImg.setFitHeight(WINDOW_HEIGHT);
+        bgImg.setFitWidth(WINDOW_WIDTH + 20);
+        bgImg.setFitHeight(WINDOW_HEIGHT + 20);
 
         root.getChildren().addAll(bg, planets, ships, buttonBar);
         bg.getChildren().add(bgImg);
@@ -80,7 +79,7 @@ public class Squares
         Random rng = new Random();
 
         // Each KeyFrame represents one tick.
-        k = new KeyFrame(Duration.millis(FRAME_DURATION), event ->
+        KeyFrame k = new KeyFrame(Duration.millis(FRAME_DURATION), event ->
         {
             // Create squares at random.
             if (rng.nextInt(100) > 95)
