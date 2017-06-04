@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -86,6 +88,7 @@ public class Squares
         buttonBar.getChildren().addAll(pauseButton, exitButton);
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+        scene.setOnKeyReleased(this::keyPressed);
         stage.setTitle("Many Squares, Handle It!");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -151,6 +154,18 @@ public class Squares
         {
             running = true;
             t.play();
+        }
+    }
+
+    /**
+     * Handle keyboard events.
+     * @param ke The keyboard event to handle.
+     */
+    private void keyPressed(KeyEvent ke)
+    {
+        if (ke.getCode() == KeyCode.P)
+        {
+            pauseGame();
         }
     }
 }
