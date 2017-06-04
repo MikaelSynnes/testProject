@@ -5,6 +5,8 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -47,11 +49,17 @@ public class Squares
     public void run()
     {
         StackPane root = new StackPane();
+        Pane bg = new Pane();
         Pane planets = new Pane();
         Pane ships = new Pane();
         VBox buttonBar = new VBox();
 
-        root.getChildren().addAll(planets, ships, buttonBar);
+        ImageView bgImg = new ImageView("testBG.png");
+        bgImg.setFitWidth(WINDOW_WIDTH);
+        bgImg.setFitHeight(WINDOW_HEIGHT);
+
+        root.getChildren().addAll(bg, planets, ships, buttonBar);
+        bg.getChildren().add(bgImg);
         planets.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         planets.setMaxSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         ships.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
