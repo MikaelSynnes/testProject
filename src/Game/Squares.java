@@ -4,6 +4,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -38,7 +40,15 @@ public class Squares
      */
     public void run()
     {
-        Group root = new Group();
+        StackPane root = new StackPane();
+        Pane planets = new Pane();
+        Pane ships = new Pane();
+
+        root.getChildren().addAll(planets, ships);
+        planets.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        planets.setMaxSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        ships.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        ships.setMaxSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         stage.setTitle("Many Squares, Handle It!");
@@ -58,7 +68,7 @@ public class Squares
                 newSquare.setFill(Color.WHITE);
                 newSquare.setStroke(Color.BLACK);
                 enemies.add(newSquare);
-                root.getChildren().add(newSquare);
+                ships.getChildren().add(newSquare);
             }
 
             ArrayList<MovableSquare> enemiesToRemove = new ArrayList<>();
@@ -70,6 +80,7 @@ public class Squares
                 if (enemy.getY() > WINDOW_HEIGHT + enemy.getHeight())
                 {
                     enemiesToRemove.add(enemy);
+                    ships.getChildren().remove(enemy);
                 }
             }
             enemies.removeAll(enemiesToRemove);
