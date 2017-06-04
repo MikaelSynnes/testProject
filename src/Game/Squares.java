@@ -89,7 +89,7 @@ public class Squares
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         scene.setOnKeyReleased(this::keyPressed);
-        stage.setTitle("Many Squares, Handle It!");
+        stage.setTitle("Norway 9001 Prototype");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
