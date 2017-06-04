@@ -97,7 +97,7 @@ public class Squares
             // Create squares at random.
             if (rng.nextInt(100) > 95)
             {
-                MovableSquare newSquare = new MovableSquare(SQUARE_WIDTH, 2, (double) rng.nextInt(WINDOW_WIDTH), (double) -SQUARE_WIDTH - 10);
+                MovableSquare newSquare = new MovableSquare(SQUARE_WIDTH, 2, (double) WINDOW_WIDTH + 10, (double) rng.nextInt(WINDOW_HEIGHT - SQUARE_WIDTH - 10));
                 newSquare.setFill(Color.WHITE);
                 newSquare.setStroke(Color.BLACK);
                 enemies.add(newSquare);
@@ -112,7 +112,7 @@ public class Squares
             }
             else
             {
-                planet.setX(planet.getX() - 1);
+                planet.setX(planet.getX() - 0.5);
             }
 
             ArrayList<MovableSquare> enemiesToRemove = new ArrayList<>();
@@ -121,7 +121,7 @@ public class Squares
             for (MovableSquare enemy : enemies)
             {
                 enemy.move();
-                if (enemy.getY() > WINDOW_HEIGHT + enemy.getHeight())
+                if (enemy.getX() < -enemy.getWidth() - 10)
                 {
                     enemiesToRemove.add(enemy);
                     ships.getChildren().remove(enemy);

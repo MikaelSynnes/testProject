@@ -18,7 +18,7 @@ public class MovableSquare extends Rectangle
 
     public void move()
     {
-        this.setY(this.getY() + speed);
+        this.setX(this.getX() - speed);
     }
 
     public void setSpeed(int newSpeed)
