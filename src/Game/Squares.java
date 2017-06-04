@@ -44,19 +44,25 @@ public class Squares
     /**
      * Main game loop.
      * It creates random squares which RAIN FROM THE MOTHER-EFFING SKY.
+     * These squares are also IN OUTER SPACE.
      */
     public void run()
     {
+        // UI layers
         StackPane root = new StackPane();
         Pane bg = new Pane();
         Pane planets = new Pane();
         Pane ships = new Pane();
+
+        // Buttons
         VBox buttonBar = new VBox();
 
+        // Background image
         ImageView bgImg = new ImageView("testBG.png");
         bgImg.setFitWidth(WINDOW_WIDTH + 20);
         bgImg.setFitHeight(WINDOW_HEIGHT + 20);
 
+        // Set up UI
         root.getChildren().addAll(bg, planets, ships, buttonBar);
         bg.getChildren().add(bgImg);
         planets.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -64,6 +70,15 @@ public class Squares
         ships.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         ships.setMaxSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
+        Random rng = new Random();
+
+        // Set up planet
+        ImageView planet = new ImageView("testPlanet.png");
+        planets.getChildren().add(planet);
+        planet.setX((double) rng.nextInt(WINDOW_WIDTH));
+        planet.setY(-500);
+
+        // Set up buttons
         Button pauseButton = new Button("Pause");
         pauseButton.setOnAction(event -> pauseGame());
         Button exitButton = new Button("Exit");
@@ -76,8 +91,6 @@ public class Squares
         stage.setResizable(false);
         stage.show();
 
-        Random rng = new Random();
-
         // Each KeyFrame represents one tick.
         KeyFrame k = new KeyFrame(Duration.millis(FRAME_DURATION), event ->
         {
@@ -89,6 +102,17 @@ public class Squares
                 newSquare.setStroke(Color.BLACK);
                 enemies.add(newSquare);
                 ships.getChildren().add(newSquare);
+            }
+
+            // Move the planet
+            if (planet.getY() > WINDOW_HEIGHT)
+            {
+                planet.setX((double) rng.nextInt(WINDOW_WIDTH));
+                planet.setY(-500);
+            }
+            else
+            {
+                planet.setY(planet.getY() + 1);
             }
 
             ArrayList<MovableSquare> enemiesToRemove = new ArrayList<>();
