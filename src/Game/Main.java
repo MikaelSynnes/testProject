@@ -29,8 +29,8 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        Squares squares = new Squares(primaryStage);
-        squares.run();
+        PlayingField playingField = new PlayingField(primaryStage);
+        playingField.run();
     }
 
     public static void main(String[] args) {
@@ -60,7 +60,7 @@ public class Main extends Application{
 
         String keyPressed = key.readInput();
         System.out.println(keyPressed);
-        player.move(keyPressed);
+        //player.move(keyPressed);
         System.out.println("One game tick done, gametick nr: " + time);
 
         // TODO: Insert gamefunction, check for input and control playerClass

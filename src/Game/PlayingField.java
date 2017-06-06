@@ -1,5 +1,6 @@
 package Game;
 
+import MoveableObjects.Enemy;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -21,7 +22,7 @@ import java.util.Random;
 /**
  * Created by Asgeir on 03.06.2017.
  */
-public class Squares
+public class PlayingField
 {
 
     private Stage stage;
@@ -33,11 +34,11 @@ public class Squares
 
     private boolean running = true;
 
-    private ArrayList<MovableSquare> enemies = new ArrayList<>();
+    private ArrayList<Enemy> enemies = new ArrayList<>();
 
     private Timeline t;
 
-    public Squares(Stage stage)
+    public PlayingField(Stage stage)
     {
         this.stage = stage;
     }
@@ -99,7 +100,7 @@ public class Squares
             // Create squares at random.
             if (rng.nextInt(100) > 95)
             {
-                MovableSquare newSquare = new MovableSquare(SQUARE_WIDTH, rng.nextInt(4) + 1, (double) WINDOW_WIDTH + 10, (double) rng.nextInt(WINDOW_HEIGHT - SQUARE_WIDTH - 10));
+                Enemy newSquare = new Enemy(SQUARE_WIDTH, rng.nextInt(4) + 1, (double) WINDOW_WIDTH + 10, (double) rng.nextInt(WINDOW_HEIGHT - SQUARE_WIDTH - 10));
                 newSquare.setFill(Color.WHITE);
                 newSquare.setStroke(Color.BLACK);
                 enemies.add(newSquare);
@@ -117,10 +118,10 @@ public class Squares
                 planet.setX(planet.getX() - 0.5);
             }
 
-            ArrayList<MovableSquare> enemiesToRemove = new ArrayList<>();
+            ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
 
             // Move enemies and remove enemies that are out of bounds.
-            for (MovableSquare enemy : enemies)
+            for (Enemy enemy : enemies)
             {
                 enemy.move();
                 if (enemy.getX() < -enemy.getWidth() - 10)

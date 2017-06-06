@@ -5,48 +5,62 @@
  */
 package MoveableObjects;
 
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
 /**
- *
  * @author Mikael
  */
-public class Player {
-boolean alive;
-    public Player() {
-         alive = true;
-        
+public class Player extends Ship
+{
 
+    boolean alive;
+
+    public Player()
+    {
+        this.setImage(new Image("testPlayer.png"));
+        alive = true;
     }
-    //Reads input from keyboard to decide if the player is going to move or stand still.
-    public void move(String input) {
-        System.out.println("input");
-        //TODO check for input on keyboard to check where is moving or if he is standing still
-        if (input.equals("w")) {
+
+    /**
+     * Move the player ship in the direction corresponding to what key is pressed.
+     * @param ke Which direction to move the player ship.
+     */
+    public void move(KeyEvent ke)
+    {
+        if (ke.getCode() == KeyCode.W || ke.getCode() == KeyCode.UP)
+        {
             //Move up
         }
-
-        else if (input.equals("a")) {
+        else if (ke.getCode() == KeyCode.A || ke.getCode() == KeyCode.LEFT)
+        {
             //move left
         }
-        else if (input.equals("s")) {
+        else if (ke.getCode() == KeyCode.S || ke.getCode() == KeyCode.DOWN)
+        {
             //move down
         }
-        else if (input.equals("d")) {
+        else if (ke.getCode() == KeyCode.D || ke.getCode() == KeyCode.RIGHT)
+        {
             //move right
-        }else if(input.equals("u")){
-            killPlayer();
-        } else {
-            //Do nothing
-            
         }
-        
+        else if (ke.getCode() == KeyCode.U)
+        {
+            killPlayer();
+        }
+
 
     }
-    public boolean checkIfAlive(){
+
+    public boolean checkIfAlive()
+    {
         return alive;
     }
-    
-    public void killPlayer(){
-        alive=false;
+
+    public void killPlayer()
+    {
+        alive = false;
     }
 
 }
