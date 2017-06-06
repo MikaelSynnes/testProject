@@ -1,5 +1,6 @@
 package MoveableObjects;
 
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -10,7 +11,8 @@ public class Enemy extends Ship
 
     public Enemy(double initialX, double initialY, double speed)
     {
-        super.setSpeed(speed);
+        super(initialX, initialY, speed);
+        this.setImage(new Image("basicEnemy.png", 50, 50, true, true));
     }
 
     public void move()

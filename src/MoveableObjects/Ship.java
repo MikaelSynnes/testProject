@@ -7,7 +7,15 @@ import javafx.scene.image.ImageView;
  */
 public abstract class Ship extends ImageView
 {
+
     private double speed;
+
+    public Ship(double initialX, double initialY, double speed)
+    {
+        setX(initialX);
+        setY(initialY);
+        setSpeed(speed);
+    }
 
     public double getSpeed()
     {

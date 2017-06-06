@@ -17,9 +17,10 @@ public class Player extends Ship
 
     boolean alive;
 
-    public Player()
+    public Player(double initialX, double initialY, double initialSpeed)
     {
-        this.setImage(new Image("testPlayer.png"));
+        super(initialX, initialY, initialSpeed);
+        this.setImage(new Image("testPlayer.png", 80, 80, true, true));
         alive = true;
     }
 

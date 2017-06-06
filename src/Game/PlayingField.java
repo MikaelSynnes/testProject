@@ -100,11 +100,9 @@ public class PlayingField
             // Create squares at random.
             if (rng.nextInt(100) > 95)
             {
-                Enemy newSquare = new Enemy(SQUARE_WIDTH, rng.nextInt(4) + 1, (double) WINDOW_WIDTH + 10, (double) rng.nextInt(WINDOW_HEIGHT - SQUARE_WIDTH - 10));
-                newSquare.setFill(Color.WHITE);
-                newSquare.setStroke(Color.BLACK);
-                enemies.add(newSquare);
-                ships.getChildren().add(newSquare);
+                Enemy newEnemy = new Enemy((double) WINDOW_WIDTH + 25, (double) rng.nextInt(WINDOW_HEIGHT - 25), (double) rng.nextInt(4));
+                enemies.add(newEnemy);
+                ships.getChildren().add(newEnemy);
             }
 
             // Move the planet
@@ -124,7 +122,7 @@ public class PlayingField
             for (Enemy enemy : enemies)
             {
                 enemy.move();
-                if (enemy.getX() < -enemy.getWidth() - 10)
+                if (enemy.getX() < -enemy.getFitWidth() - 25)
                 {
                     enemiesToRemove.add(enemy);
                     ships.getChildren().remove(enemy);
