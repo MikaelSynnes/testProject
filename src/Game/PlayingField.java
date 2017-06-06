@@ -1,6 +1,7 @@
 package Game;
 
 import MoveableObjects.Enemy;
+import MoveableObjects.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -80,6 +81,10 @@ public class PlayingField
         planet.setX(WINDOW_WIDTH + 10);
         planet.setY((double) rng.nextInt(WINDOW_HEIGHT) - 200);
 
+        // Set up player ship
+        Player playerShip = new Player(0, 350, 5);
+        ships.getChildren().add(playerShip);
+
         // Set up buttons
         Button pauseButton = new Button("Pause");
         pauseButton.setOnAction(event -> pauseGame());
@@ -89,6 +94,7 @@ public class PlayingField
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         scene.setOnKeyReleased(this::keyPressed);
+        scene.setOnKeyPressed(playerShip::move);
         stage.setTitle("Norway 9001 Prototype");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -100,7 +106,7 @@ public class PlayingField
             // Create squares at random.
             if (rng.nextInt(100) > 95)
             {
-                Enemy newEnemy = new Enemy((double) WINDOW_WIDTH + 25, (double) rng.nextInt(WINDOW_HEIGHT - 25), (double) rng.nextInt(4));
+                Enemy newEnemy = new Enemy((double) WINDOW_WIDTH + 50, (double) rng.nextInt(WINDOW_HEIGHT - 25), (double) rng.nextInt(4));
                 enemies.add(newEnemy);
                 ships.getChildren().add(newEnemy);
             }
@@ -122,7 +128,7 @@ public class PlayingField
             for (Enemy enemy : enemies)
             {
                 enemy.move();
-                if (enemy.getX() < -enemy.getFitWidth() - 25)
+                if (enemy.getX() < -enemy.getFitWidth() - 60)
                 {
                     enemiesToRemove.add(enemy);
                     ships.getChildren().remove(enemy);

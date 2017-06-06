@@ -20,7 +20,7 @@ public class Player extends Ship
     public Player(double initialX, double initialY, double initialSpeed)
     {
         super(initialX, initialY, initialSpeed);
-        this.setImage(new Image("testPlayer.png", 80, 80, true, true));
+        this.setImage(new Image("testPlayer.png", 60, 60, true, true));
         alive = true;
     }
 
@@ -32,19 +32,23 @@ public class Player extends Ship
     {
         if (ke.getCode() == KeyCode.W || ke.getCode() == KeyCode.UP)
         {
-            //Move up
+            // Move up
+            setY(getY() - getSpeed());
         }
         else if (ke.getCode() == KeyCode.A || ke.getCode() == KeyCode.LEFT)
         {
-            //move left
+            // Move left
+            setX(getX() - getSpeed());
         }
         else if (ke.getCode() == KeyCode.S || ke.getCode() == KeyCode.DOWN)
         {
-            //move down
+            // Move down
+            setY(getY() + getSpeed());
         }
         else if (ke.getCode() == KeyCode.D || ke.getCode() == KeyCode.RIGHT)
         {
-            //move right
+            // Move right
+            setX(getX() + getSpeed());
         }
         else if (ke.getCode() == KeyCode.U)
         {
