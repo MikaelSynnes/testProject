@@ -94,6 +94,7 @@ public class PlayingField
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         scene.setOnKeyReleased(this::keyPressed);
+         scene.setOnKeyReleased(playerShip::release);
         scene.setOnKeyPressed(playerShip::move);
         stage.setTitle("Norway 9001 Prototype");
         stage.setScene(scene);

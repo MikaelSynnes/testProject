@@ -75,22 +75,32 @@ public class Player extends Ship {
         setY(getY() + ySpeed);
     }
 
-    public void moveUp() {
-        setY(getY() - getSpeed());
+   public void release(KeyEvent ke) {
+        if (ke.getCode() == KeyCode.W || ke.getCode() == KeyCode.UP) {
+            // Move up
+            //   setY(getY() - getSpeed());
+            ySpeed =0;
+        }
+        if (ke.getCode() == KeyCode.A || ke.getCode() == KeyCode.LEFT) {
+            // Move left
+            //   setX(getX() - getSpeed());
+            xSpeed =0;
+        }
+        if (ke.getCode() == KeyCode.S || ke.getCode() == KeyCode.DOWN) {
+            // Move down
+            //  setY(getY() + getSpeed());
+            ySpeed =0;
+        }
+        if (ke.getCode() == KeyCode.D || ke.getCode() == KeyCode.RIGHT) {
+            // Move right
+            //  setX(getX() + getSpeed());
+            xSpeed = 0;
+        }
+        if (ke.getCode() == KeyCode.U) {
+            killPlayer();
+        }
+        movePlayer();
     }
-
-    public void moveDown() {
-        setY(getY() + getSpeed());
-    }
-
-    public void moveLeft() {
-        setX(getX() - getSpeed());
-    }
-
-    public void moveRight() {
-        setX(getX() + getSpeed());
-    }
-
     public boolean checkIfAlive() {
         return alive;
     }
