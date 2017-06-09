@@ -7,58 +7,45 @@ package Game;
 
 import MoveableObjects.Player;
 import Movement.Keyboard;
-import javafx.scene.input.KeyEvent;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.stage.Stage;
-
-import javafx.event.EventHandler;
-import javafx.scene.layout.StackPane;
-import javax.swing.JTextField;
 
 /**
  *
  * @author Mikael
  */
-public class Main extends Application {
+public class Main extends Application{
 
     private static int time;
     private static boolean run = false;
     private static boolean paused = false;
     private static Keyboard key;
     private static Player player;
-    private static JTextField typingArea;
-
 
     public Main() {
 
     }
 
- 
-
-
-
-    
-
-
+    @Override
     public void start(Stage primaryStage) throws Exception
     {
         PlayingField playingField = new PlayingField(primaryStage);
         playingField.run();
-
     }
 
     public static void main(String[] args) {
-        player = new Player();
+        //player=new Player();
         //key=new Keyboard();
         //run();
         launch(args);
     }
 
     public static void run() {
-        run = true;
+        run=true;
         while (run) {
             if (!player.checkIfAlive()) {
-                run = false;
+                run=false;
             }
             if (paused) {
             } else {
@@ -72,14 +59,6 @@ public class Main extends Application {
 
     public static void doOneGameTick() {
 
-
-        String keyPressed = key.readInput();
-        System.out.println(keyPressed);
-        //player.move(keyPressed);
-        System.out.println("One game tick done, gametick nr: " + time);
-
-
-        // TODO: Insert gamefunction, check for input and control playerClass
     }
 
     // Sets the game on pause if its unpaused. if the game is unpaused it will pause it.
@@ -95,7 +74,5 @@ public class Main extends Application {
     public void end() {
         run = false;
     }
-
- 
 
 }

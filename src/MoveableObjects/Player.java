@@ -12,59 +12,90 @@ import javafx.scene.input.KeyEvent;
 /**
  * @author Mikael
  */
-public class Player extends Ship
-{
+public class Player extends Ship {
 
     boolean alive;
+    double ySpeed;
+    double xSpeed;
 
-    public Player(double initialX, double initialY, double initialSpeed)
-    {
+    public Player(double initialX, double initialY, double initialSpeed) {
         super(initialX, initialY, initialSpeed);
         this.setImage(new Image("testPlayer.png", 60, 60, true, true));
         alive = true;
     }
 
     /**
-     * Move the player ship in the direction corresponding to what key is pressed.
+     * Move the player ship in the direction corresponding to what key is
+     * pressed.
+     *
      * @param ke Which direction to move the player ship.
      */
-    public void move(KeyEvent ke)
-    {
-        if (ke.getCode() == KeyCode.W || ke.getCode() == KeyCode.UP)
-        {
+    public void move(KeyEvent ke) {
+        if (ke.getCode() == KeyCode.W || ke.getCode() == KeyCode.UP) {
             // Move up
-            setY(getY() - getSpeed());
+            //   setY(getY() - getSpeed());
+            ySpeed = ySpeed - 10;
         }
-        else if (ke.getCode() == KeyCode.A || ke.getCode() == KeyCode.LEFT)
-        {
+        if (ke.getCode() == KeyCode.A || ke.getCode() == KeyCode.LEFT) {
             // Move left
-            setX(getX() - getSpeed());
+            //   setX(getX() - getSpeed());
+            xSpeed = xSpeed - 10;
         }
-        else if (ke.getCode() == KeyCode.S || ke.getCode() == KeyCode.DOWN)
-        {
+        if (ke.getCode() == KeyCode.S || ke.getCode() == KeyCode.DOWN) {
             // Move down
-            setY(getY() + getSpeed());
+            //  setY(getY() + getSpeed());
+            ySpeed = ySpeed + 10;
         }
-        else if (ke.getCode() == KeyCode.D || ke.getCode() == KeyCode.RIGHT)
-        {
+        if (ke.getCode() == KeyCode.D || ke.getCode() == KeyCode.RIGHT) {
             // Move right
-            setX(getX() + getSpeed());
+            //  setX(getX() + getSpeed());
+            xSpeed = xSpeed + 10;
         }
-        else if (ke.getCode() == KeyCode.U)
-        {
+        if (ke.getCode() == KeyCode.U) {
             killPlayer();
         }
-
-
+        movePlayer();
     }
 
-    public boolean checkIfAlive()
-    {
+    public void movePlayer() {
+        if (xSpeed <= -getSpeed()) {
+            xSpeed = -getSpeed();
+
+        }
+        if (ySpeed <= -getSpeed()) {
+            ySpeed = -getSpeed();
+        }
+        if (xSpeed >= getSpeed()) {
+            xSpeed = getSpeed();
+        }
+        if (ySpeed >= getSpeed()) {
+            ySpeed = getSpeed();
+        }
+        setX(getX() + xSpeed);
+        setY(getY() + ySpeed);
+    }
+
+    public void moveUp() {
+        setY(getY() - getSpeed());
+    }
+
+    public void moveDown() {
+        setY(getY() + getSpeed());
+    }
+
+    public void moveLeft() {
+        setX(getX() - getSpeed());
+    }
+
+    public void moveRight() {
+        setX(getX() + getSpeed());
+    }
+
+    public boolean checkIfAlive() {
         return alive;
     }
 
-    public void killPlayer()
-    {
+    public void killPlayer() {
         alive = false;
     }
 
