@@ -27,19 +27,23 @@ public class Main extends Application {
     private static Keyboard key;
     private static Player player;
     private static JTextField typingArea;
-    private static Squares squares;
+
 
     public Main() {
 
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+ 
 
-        squares = new Squares(primaryStage);
+
+
     
 
-        squares.run();
+
+    public void start(Stage primaryStage) throws Exception
+    {
+        PlayingField playingField = new PlayingField(primaryStage);
+        playingField.run();
 
     }
 
@@ -67,7 +71,13 @@ public class Main extends Application {
     }
 
     public static void doOneGameTick() {
-      
+
+
+        String keyPressed = key.readInput();
+        System.out.println(keyPressed);
+        //player.move(keyPressed);
+        System.out.println("One game tick done, gametick nr: " + time);
+
 
         // TODO: Insert gamefunction, check for input and control playerClass
     }
