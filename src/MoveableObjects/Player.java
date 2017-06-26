@@ -35,6 +35,7 @@ public class Player extends Ship
 
     /**
      * Event handler for starting player movement.
+     * The player will only move in a specified direction as long as the corresponding key is held down.
      */
     private EventHandler<KeyEvent> keyDownListener = ke ->
     {
@@ -63,12 +64,13 @@ public class Player extends Ship
 
     /**
      * Event handler for stopping player movement. (Killing a player technically stops them from moving.)
+     * The player will stop moving in a specific direction when the corresponding key is released.
      */
     private EventHandler<KeyEvent> keyUpListener = ke ->
     {
         if (ke.getCode() == KeyCode.UP || ke.getCode() == KeyCode.W || ke.getCode() == KeyCode.DOWN || ke.getCode() == KeyCode.S)
             yVelocity = 0;
-        else if (ke.getCode() == KeyCode.RIGHT || ke.getCode() == KeyCode.D)
+        else if (ke.getCode() == KeyCode.RIGHT || ke.getCode() == KeyCode.D || ke.getCode() == KeyCode.LEFT || ke.getCode() == KeyCode.A)
             xVelocity = 0;
         else if (ke.getCode() == KeyCode.U)
             killPlayer();
