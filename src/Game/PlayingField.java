@@ -123,8 +123,11 @@ public class PlayingField
             }
 
             // Move the player
-            playerShip.setX(playerShip.getX() + playerShip.getxVelocity());
-            playerShip.setY(playerShip.getY() + playerShip.getyVelocity());
+            if (playerShip.isAlive())
+            {
+                playerShip.setX(playerShip.getX() + playerShip.getxVelocity());
+                playerShip.setY(playerShip.getY() + playerShip.getyVelocity());
+            }
 
             ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
 

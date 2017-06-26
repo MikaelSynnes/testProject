@@ -140,4 +140,9 @@ public class Player extends Ship
     {
         return yVelocity;
     }
+
+    public boolean isAlive()
+    {
+        return alive;
+    }
 }
