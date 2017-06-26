@@ -13,7 +13,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -94,7 +93,8 @@ public class PlayingField
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         scene.setOnKeyReleased(this::keyPressed);
-        scene.setOnKeyPressed(playerShip::move);
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, playerShip.getKeyDownListener());
+        scene.addEventHandler(KeyEvent.KEY_RELEASED, playerShip.getKeyUpListener());
         stage.setTitle("Norway 9001 Prototype");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -121,6 +121,10 @@ public class PlayingField
             {
                 planet.setX(planet.getX() - 0.5);
             }
+
+            // Move the player
+            playerShip.setX(playerShip.getX() + playerShip.getxVelocity());
+            playerShip.setY(playerShip.getY() + playerShip.getyVelocity());
 
             ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
 
