@@ -125,8 +125,22 @@ public class PlayingField
             // Move the player
             if (playerShip.isAlive())
             {
-                playerShip.setX(playerShip.getX() + playerShip.getxVelocity());
-                playerShip.setY(playerShip.getY() + playerShip.getyVelocity());
+                // Stay within bounds
+                // TODO: Fix edge bouncing
+                if (playerShip.getX() < 0)
+                    playerShip.setX(0);
+                else if (playerShip.getX() > WINDOW_WIDTH - playerShip.getFitWidth())
+                    playerShip.setX(WINDOW_WIDTH - playerShip.getFitWidth());
+                else if (playerShip.getY() < 0)
+                    playerShip.setY(playerShip.getFitHeight());
+                else if (playerShip.getY() > WINDOW_HEIGHT)
+                    playerShip.setY(WINDOW_HEIGHT);
+                else
+                {
+                    // Player is within bounds and can move freely
+                    playerShip.setX(playerShip.getX() + playerShip.getxVelocity());
+                    playerShip.setY(playerShip.getY() + playerShip.getyVelocity());
+                }
             }
 
             ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
@@ -170,6 +184,7 @@ public class PlayingField
 
     /**
      * Handle keyboard keyPressed events.
+     *
      * @param ke The keyboard event to handle.
      */
     private void keyPressed(KeyEvent ke)

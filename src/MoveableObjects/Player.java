@@ -136,9 +136,19 @@ public class Player extends Ship
         return xVelocity;
     }
 
+    public void setxVelocity(double newVelocity)
+    {
+        xVelocity = newVelocity;
+    }
+
     public double getyVelocity()
     {
         return yVelocity;
+    }
+
+    public void setyVelocity(double newVelocity)
+    {
+        yVelocity = newVelocity;
     }
 
     public boolean isAlive()
