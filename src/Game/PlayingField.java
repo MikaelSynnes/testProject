@@ -127,7 +127,7 @@ public class PlayingField
             // Create squares at random.
             if (rng.nextInt(100) > 95)
             {
-                Enemy newEnemy = new Enemy((double) WINDOW_WIDTH + 50, (double) rng.nextInt(WINDOW_HEIGHT - 25), (double) rng.nextInt(4));
+                Enemy newEnemy = new Enemy((double) WINDOW_WIDTH + 50, (double) rng.nextInt(WINDOW_HEIGHT - 25), (double) rng.nextInt(4), 50);
                 enemies.add(newEnemy);
                 ships.getChildren().add(newEnemy);
             }
