@@ -175,6 +175,7 @@ public class PlayingField
                     playerShip.setX(playerShip.getX() + playerShip.getxVelocity());
                     playerShip.setY(playerShip.getY() + playerShip.getyVelocity());
                 }
+                playerShip.detectCollisions(enemies);
             }
 
             ArrayList<Enemy> enemiesToRemove = new ArrayList<>();

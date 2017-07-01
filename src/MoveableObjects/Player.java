@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.util.ArrayList;
+
 /**
  * Class representing a player ship.
  * A player ship can move with WASD and the arrow keys.
@@ -22,7 +24,8 @@ public class Player extends Ship
 {
 
     private double xVelocity, yVelocity;
-    private final static int DEFAULT_MAX_HP = 100;
+    private static final int DEFAULT_MAX_HP = 100;
+    private static final int COLLISION_DMG = 10;
 
     /**
      * Default constructor. Sets max HP to DEFAULT_MAX_HP.
@@ -100,7 +103,6 @@ public class Player extends Ship
         // Suicide button
         else if (ke.getCode() == KeyCode.U)
         {
-            alive = false;
             die();
         }
     };
@@ -144,11 +146,8 @@ public class Player extends Ship
         }
         else if (ke.getCode() == KeyCode.U)
         {
-            alive = false;
             die();
         }
-
-
     }
 
     public double getxVelocity()
@@ -171,9 +170,25 @@ public class Player extends Ship
         yVelocity = newVelocity;
     }
 
+    /**
+     * Collision detection for enemy ships.
+     */
+    public void detectCollisions(ArrayList<Enemy> enemies)
+    {
+        for (Enemy enemy : enemies)
+        {
+            if (this.intersects(enemy.getLayoutBounds()) && enemy.isCollidable())
+            {
+                this.takeDamage(COLLISION_DMG);
+                enemy.die();
+            }
+        }
+    }
+
     @Override
     public void die()
     {
+        alive = false;
         this.setImage(null);
         // TODO: Add code for death animation
     }
