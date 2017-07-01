@@ -38,6 +38,7 @@ public class PlayingField
     private static final int WINDOW_WIDTH = 1280;
     private static final int WINDOW_HEIGHT = 720;
     private static final double FRAME_DURATION = 10;
+    private Font spaceFontSmall;
     private Font spaceFontMedium;
     private Font spaceFontLarge;
     private boolean running = true;
@@ -51,8 +52,9 @@ public class PlayingField
         this.stage = stage;
         try
         {
-            spaceFontMedium = Font.loadFont(new FileInputStream(new File("font/NEUROPOL.TTF")), 16);
-            spaceFontLarge = Font.loadFont(new FileInputStream(new File("font/NEUROPOL.TTF")), 24);
+            spaceFontSmall = Font.loadFont(new FileInputStream(new File("font/NEUROPOL.TTF")), 16);
+            spaceFontMedium = Font.loadFont(new FileInputStream(new File("font/NEUROPOL.TTF")), 24);
+            spaceFontLarge = Font.loadFont(new FileInputStream(new File("font/NEUROPOL.TTF")), 36);
         }
         catch (FileNotFoundException fnfe)
         {
@@ -73,15 +75,22 @@ public class PlayingField
         Pane planets = new Pane();
         Pane ships = new Pane();
 
+        // Drop shadow effect for labels
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(Color.BLACK);
+
         // HP label
         Label hpLabel = new Label();
-        hpLabel.setFont(spaceFontLarge);
+        hpLabel.setFont(spaceFontMedium);
         hpLabel.setTextFill(Color.WHITE);
+        hpLabel.setEffect(dropShadow);
 
-        // HP label text effects
-        DropShadow hpShadow = new DropShadow();
-        hpShadow.setColor(Color.BLACK);
-        hpLabel.setEffect(hpShadow);
+        // Game over label
+        Label gameOverLabel = new Label("GAME OVER");
+        gameOverLabel.setFont(spaceFontLarge);
+        gameOverLabel.setTextFill(Color.WHITE);
+        gameOverLabel.setEffect(dropShadow);
+        gameOverLabel.setVisible(false);
 
         // Buttons
         VBox buttonBar = new VBox();
@@ -92,7 +101,7 @@ public class PlayingField
         bgImg.setFitHeight(WINDOW_HEIGHT + 20);
 
         // Set up UI
-        root.getChildren().addAll(bg, planets, ships, buttonBar, hpLabel);
+        root.getChildren().addAll(bg, planets, ships, buttonBar, hpLabel, gameOverLabel);
         bg.getChildren().add(bgImg);
         planets.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         planets.setMaxSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -116,10 +125,10 @@ public class PlayingField
         // Set up buttons
         Button pauseButton = new Button("Pause");
         pauseButton.setOnAction(event -> pauseGame());
-        pauseButton.setFont(spaceFontMedium);
+        pauseButton.setFont(spaceFontSmall);
         Button exitButton = new Button("Exit");
         exitButton.setOnAction(event -> Platform.exit());
-        exitButton.setFont(spaceFontMedium);
+        exitButton.setFont(spaceFontSmall);
         buttonBar.getChildren().addAll(pauseButton, exitButton);
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -176,6 +185,10 @@ public class PlayingField
                     playerShip.setY(playerShip.getY() + playerShip.getyVelocity());
                 }
                 playerShip.detectCollisions(enemies);
+            }
+            else
+            {
+                gameOverLabel.setVisible(true);
             }
 
             ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
