@@ -13,10 +13,15 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -30,8 +35,7 @@ public class PlayingField
     private static final int WINDOW_WIDTH = 1280;
     private static final int WINDOW_HEIGHT = 720;
     private static final double FRAME_DURATION = 10;
-    private static final int SQUARE_WIDTH = 40;
-
+    private Font spaceFont;
     private boolean running = true;
 
     private ArrayList<Enemy> enemies = new ArrayList<>();
@@ -41,6 +45,14 @@ public class PlayingField
     public PlayingField(Stage stage)
     {
         this.stage = stage;
+        try
+        {
+            spaceFont = Font.loadFont(new FileInputStream(new File("font/NEUROPOL.TTF")), 16);
+        }
+        catch (FileNotFoundException fnfe)
+        {
+            fnfe.printStackTrace();
+        }
     }
 
     /**
@@ -87,8 +99,10 @@ public class PlayingField
         // Set up buttons
         Button pauseButton = new Button("Pause");
         pauseButton.setOnAction(event -> pauseGame());
+        pauseButton.setFont(spaceFont);
         Button exitButton = new Button("Exit");
         exitButton.setOnAction(event -> Platform.exit());
+        exitButton.setFont(spaceFont);
         buttonBar.getChildren().addAll(pauseButton, exitButton);
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
