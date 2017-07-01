@@ -175,14 +175,19 @@ public class Player extends Ship
      */
     public void detectCollisions(ArrayList<Enemy> enemies)
     {
+        ArrayList<Enemy> enemiesHit = new ArrayList<>();
+
         for (Enemy enemy : enemies)
         {
             if (this.intersects(enemy.getLayoutBounds()) && enemy.isCollidable())
             {
                 this.takeDamage(COLLISION_DMG);
+                enemiesHit.add(enemy);
                 enemy.die();
             }
         }
+
+        enemies.removeAll(enemiesHit);
     }
 
     @Override
