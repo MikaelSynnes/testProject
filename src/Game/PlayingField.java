@@ -5,8 +5,10 @@ import MoveableObjects.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,7 +23,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -35,7 +36,8 @@ public class PlayingField
     private static final int WINDOW_WIDTH = 1280;
     private static final int WINDOW_HEIGHT = 720;
     private static final double FRAME_DURATION = 10;
-    private Font spaceFont;
+    private Font spaceFontMedium;
+    private Font spaceFontLarge;
     private boolean running = true;
 
     private ArrayList<Enemy> enemies = new ArrayList<>();
@@ -47,7 +49,8 @@ public class PlayingField
         this.stage = stage;
         try
         {
-            spaceFont = Font.loadFont(new FileInputStream(new File("font/NEUROPOL.TTF")), 16);
+            spaceFontMedium = Font.loadFont(new FileInputStream(new File("font/NEUROPOL.TTF")), 16);
+            spaceFontLarge = Font.loadFont(new FileInputStream(new File("font/NEUROPOL.TTF")), 24);
         }
         catch (FileNotFoundException fnfe)
         {
@@ -68,6 +71,9 @@ public class PlayingField
         Pane planets = new Pane();
         Pane ships = new Pane();
 
+        // HP label
+        Label hpLabel = new Label();
+
         // Buttons
         VBox buttonBar = new VBox();
 
@@ -77,12 +83,13 @@ public class PlayingField
         bgImg.setFitHeight(WINDOW_HEIGHT + 20);
 
         // Set up UI
-        root.getChildren().addAll(bg, planets, ships, buttonBar);
+        root.getChildren().addAll(bg, planets, ships, buttonBar, hpLabel);
         bg.getChildren().add(bgImg);
         planets.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         planets.setMaxSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         ships.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         ships.setMaxSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        buttonBar.setAlignment(Pos.TOP_RIGHT);
 
         Random rng = new Random();
 
@@ -99,10 +106,10 @@ public class PlayingField
         // Set up buttons
         Button pauseButton = new Button("Pause");
         pauseButton.setOnAction(event -> pauseGame());
-        pauseButton.setFont(spaceFont);
+        pauseButton.setFont(spaceFontMedium);
         Button exitButton = new Button("Exit");
         exitButton.setOnAction(event -> Platform.exit());
-        exitButton.setFont(spaceFont);
+        exitButton.setFont(spaceFontMedium);
         buttonBar.getChildren().addAll(pauseButton, exitButton);
 
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);

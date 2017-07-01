@@ -9,10 +9,16 @@ import javafx.scene.shape.Rectangle;
 public class Enemy extends Ship
 {
 
-    public Enemy(double initialX, double initialY, double speed)
+    public Enemy(double initialX, double initialY, double speed, int maxHP)
     {
-        super(initialX, initialY, speed);
+        super(initialX, initialY, speed, maxHP);
         this.setImage(new Image("basicEnemy.png", 50, 50, true, true));
+    }
+
+    @Override
+    public void die()
+    {
+        // TODO: Add code for death animation
     }
 
     public void move()

@@ -21,16 +21,41 @@ import javafx.scene.input.KeyEvent;
 public class Player extends Ship
 {
 
-    private boolean alive;
     private double xVelocity, yVelocity;
+    private final static int DEFAULT_MAX_HP = 100;
 
+    /**
+     * Default constructor. Sets max HP to DEFAULT_MAX_HP.
+     *
+     * @param initialX     Initial X position of player.
+     * @param initialY     Initial Y position of player.
+     * @param initialSpeed Initial speed of player.
+     */
     public Player(double initialX, double initialY, double initialSpeed)
     {
-        super(initialX, initialY, initialSpeed);
+        super(initialX, initialY, initialSpeed, DEFAULT_MAX_HP);
+        setupPlayer();
+    }
+
+    /**
+     * Custom HP constructor. Allows to set a custom amount of starting HP.
+     *
+     * @param initialX     Initial X position of player.
+     * @param initialY     Initial Y position of player.
+     * @param initialSpeed Initial speed of player.
+     * @param maxHP        Starting HP of player.
+     */
+    public Player(double initialX, double initialY, double initialSpeed, int maxHP)
+    {
+        super(initialX, initialY, initialSpeed, maxHP);
+        setupPlayer();
+    }
+
+    private void setupPlayer()
+    {
         xVelocity = 0;
         yVelocity = 0;
         this.setImage(new Image("testPlayer.png", 50, 50, true, true));
-        alive = true;
     }
 
     /**
@@ -72,8 +97,12 @@ public class Player extends Ship
             yVelocity = 0;
         else if (ke.getCode() == KeyCode.RIGHT || ke.getCode() == KeyCode.D || ke.getCode() == KeyCode.LEFT || ke.getCode() == KeyCode.A)
             xVelocity = 0;
+        // Suicide button
         else if (ke.getCode() == KeyCode.U)
-            killPlayer();
+        {
+            alive = false;
+            die();
+        }
     };
 
     public EventHandler<KeyEvent> getKeyDownListener()
@@ -115,20 +144,11 @@ public class Player extends Ship
         }
         else if (ke.getCode() == KeyCode.U)
         {
-            killPlayer();
+            alive = false;
+            die();
         }
 
 
-    }
-
-    public boolean checkIfAlive()
-    {
-        return alive;
-    }
-
-    public void killPlayer()
-    {
-        alive = false;
     }
 
     public double getxVelocity()
@@ -151,8 +171,9 @@ public class Player extends Ship
         yVelocity = newVelocity;
     }
 
-    public boolean isAlive()
+    @Override
+    public void die()
     {
-        return alive;
+        // TODO: Add code for death animation
     }
 }
