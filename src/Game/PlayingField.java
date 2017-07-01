@@ -9,12 +9,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -73,6 +75,13 @@ public class PlayingField
 
         // HP label
         Label hpLabel = new Label();
+        hpLabel.setFont(spaceFontLarge);
+        hpLabel.setTextFill(Color.WHITE);
+
+        // HP label text effects
+        DropShadow hpShadow = new DropShadow();
+        hpShadow.setColor(Color.BLACK);
+        hpLabel.setEffect(hpShadow);
 
         // Buttons
         VBox buttonBar = new VBox();
@@ -90,6 +99,7 @@ public class PlayingField
         ships.setMinSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         ships.setMaxSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         buttonBar.setAlignment(Pos.TOP_RIGHT);
+        root.setAlignment(hpLabel, Pos.TOP_LEFT);
 
         Random rng = new Random();
 
@@ -142,6 +152,9 @@ public class PlayingField
             {
                 planet.setX(planet.getX() - 0.5);
             }
+
+            // Update player hit points
+            hpLabel.setText("HP: " + playerShip.getCurrentHP());
 
             // Move the player
             if (playerShip.isAlive())

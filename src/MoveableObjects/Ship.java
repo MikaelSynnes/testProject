@@ -33,6 +33,11 @@ public abstract class Ship extends ImageView
         this.speed = speed;
     }
 
+    public int getCurrentHP()
+    {
+        return currentHP;
+    }
+
     /**
      * Method called when a ship is hit and takes damage.
      * @param damage The incoming amount of damage.

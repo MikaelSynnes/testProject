@@ -40,6 +40,7 @@ public class Main extends Application{
         launch(args);
     }
 
+    /*
     public static void run() {
         run=true;
         while (run) {
@@ -55,6 +56,7 @@ public class Main extends Application{
 
         System.out.println("GAME OVER");
     }
+    */
 
     public static void doOneGameTick() {
 
