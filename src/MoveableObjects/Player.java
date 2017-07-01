@@ -174,6 +174,7 @@ public class Player extends Ship
     @Override
     public void die()
     {
+        this.setImage(null);
         // TODO: Add code for death animation
     }
 }
